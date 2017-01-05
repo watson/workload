@@ -88,7 +88,7 @@ Emitted if an error occurs during one of the requests.
 Emitted every time a request have been successfully performed. An object
 with the following properties is emitted:
 
-- `request` - The request object given in the requests array
+- `request` - The request object given in the `requests` array
 - `response` - The response object (an `http.IncomingMessage` instance)
 - `body` - The body of the response
 
@@ -109,11 +109,12 @@ A filter is a function that will lower the chance of a request being
 made.
 
 The function is called every time a request is ready to be made. It's
-passed the request object and a callback. Whether ot not it calls the
+passed the request object and a callback. Whether or not it calls the
 callback determins if the request is performed or not.
 
-It's also possible to modify the request by manipulating the request
-object and passing it as an argument to the callback.
+It's also possible to modify the request inside a filter function by
+manipulating the request object and passing it as an argument to the
+callback.
 
 Example filter function that only makes requests between 6am and 7am:
 
