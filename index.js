@@ -24,7 +24,7 @@ function Workload (opts) {
   })
 
   this._timer = setInterval(function () {
-    var req = weighted.select(opts.requests, weights)
+    var req = xtend({}, weighted.select(opts.requests, weights))
     filter(req, function (modified) {
       self._visit(modified || req)
     })
@@ -46,7 +46,7 @@ Workload.prototype.stop = function stop () {
 Workload.prototype._visit = function _visit (req) {
   var self = this
 
-  req = xtend({}, req, {headers: this._defaultHeaders})
+  req = xtend(req, {headers: this._defaultHeaders})
 
   request(req, function (err, res, body) {
     if (err) return self.emit('error', err)

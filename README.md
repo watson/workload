@@ -125,6 +125,15 @@ function (request, next) {
 }
 ```
 
+Example filter function that modifies the request URL:
+
+```js
+function (request, next) {
+  request.url += '/' + Math.random()
+  next(request)
+}
+```
+
 ## License
 
 MIT
