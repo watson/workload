@@ -6,6 +6,9 @@ var xtend = require('xtend')
 var request = require('request')
 var weighted = require('weighted')
 var maybe = require('mostly-working-hours')
+var pkg = require('./package')
+
+var USER_AGENT = pkg.name + '/' + pkg.version
 
 module.exports = Workload
 
@@ -46,7 +49,7 @@ Workload.prototype.stop = function stop () {
 Workload.prototype._visit = function _visit (req) {
   var self = this
 
-  req = xtend(req, {headers: this._defaultHeaders})
+  req = xtend(req, {headers: this._defaultHeaders}, {headers: {'user-agent': USER_AGENT}})
 
   request(req, function (err, res, body) {
     if (err) return self.emit('error', err)
