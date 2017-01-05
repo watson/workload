@@ -20,11 +20,35 @@ period of time.
 
 ## Installation
 
+For use from the command line, install globally:
+
+```
+npm install workload --global
+```
+
+For use programmatically:
+
 ```
 npm install workload --save
 ```
 
-## Usage
+## CLI Usage
+
+Example making one request per second to 5 different URL's with
+different weights:
+
+```
+workload --max 1 \
+  POST,http://example.com/signup,"Hello World" \
+  10,http://example.com/ \
+  2,http://example.com/foo \
+  4,http://example.com/bar \
+  8,http://example.com/baz
+```
+
+Run `workload --help` for all options.
+
+## Programmatic Usage
 
 ```js
 var Workload = require('workload')
