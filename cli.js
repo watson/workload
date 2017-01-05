@@ -38,7 +38,7 @@ function run () {
       var method = visit.request.method || 'GET'
       var url = visit.request.url
       var code = visit.response.statusCode
-      console.log(code, http.STATUS_CODES[code], method, url)
+      console.log('%d %s %s %s', code, http.STATUS_CODES[code], method, url)
     })
   }
 }
