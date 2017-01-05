@@ -121,7 +121,7 @@ test('default values', function (t) {
   })
 })
 
-test('500 requests', function (t) {
+test('weights - 500 requests', function (t) {
   var total = 0
   var max = 500
   var visits = []
