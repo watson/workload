@@ -88,7 +88,7 @@ Emitted if an error occurs during one of the requests.
 Emitted every time a request have been successfully performed. An object
 with the following properties is emitted:
 
-- `request` - The request object given in the `requests` array
+- `request` - The request options used when making the request
 - `response` - The response object (an `http.IncomingMessage` instance)
 - `body` - The body of the response
 
