@@ -6,7 +6,6 @@
   "bin": "cli.js",
   "dependencies": {
     "csv-line": "^1.2.0",
-    "is-it-weekend": "^1.0.0",
     "minimist": "^1.2.0",
     "mostly-working-hours": "^1.0.0",
     "request": "^2.79.0",
