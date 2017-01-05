@@ -36,7 +36,7 @@ var workload = new Workload({
     {weight: 10, url: 'http://example.com/'},
     {weight: 2, url: 'http://example.com/foo'},
     {weight: 4, url: 'http://example.com/bar'},
-    {weight: 8, url: 'http://example.com/baz'},
+    {weight: 8, url: 'http://example.com/baz'}
   ]
 })
 
