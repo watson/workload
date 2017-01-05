@@ -16,6 +16,7 @@ period of time.
 
 [![Build status](https://travis-ci.org/watson/workload.svg?branch=master)](https://travis-ci.org/watson/workload)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+[![sponsor](https://img.shields.io/badge/sponsored%20by-Opbeat-3360A3.svg)](https://opbeat.com)
 
 ## Installation
 
@@ -133,6 +134,10 @@ function (request, next) {
   next(request)
 }
 ```
+
+## Acknowledgements
+
+This project was kindly sponsored by [Opbeat](https://opbeat.com).
 
 ## License
 
