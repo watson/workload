@@ -18,7 +18,7 @@ function Workload (opts) {
   EventEmitter.call(this)
 
   var self = this
-  var max = (opts.max || 12) / 60 // default to max 12 requests per minute
+  var interval = Math.round(1000 / ((opts.max || 12) / 60)) // default to max 12 requests per minute
   var filter = opts.filter || function (_, cb) { cb() }
   this._defaultHeaders = opts.headers
 
@@ -31,7 +31,7 @@ function Workload (opts) {
     filter(req, function (modified) {
       self._visit(modified || req)
     })
-  }, Math.round(1000 / max))
+  }, interval)
 }
 
 util.inherits(Workload, EventEmitter)
