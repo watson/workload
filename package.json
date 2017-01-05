@@ -11,7 +11,8 @@
     "xtend": "^4.0.1"
   },
   "devDependencies": {
-    "standard": "^8.6.0"
+    "standard": "^8.6.0",
+    "tape": "^4.6.3"
   },
   "scripts": {
     "test": "standard && node test.js"
