@@ -32,7 +32,7 @@ var workload = new Workload({
   max: 0.5, // make a request once every 2 seconds maximum
   filter: Workload.stdFilters.workingHours,
   requests: [
-    {weight: 1, url: 'http://example.com/signup', method: 'POST', json: {...}},
+    {weight: 1, url: 'http://example.com/signup', method: 'POST', body: '...'},
     {weight: 10, url: 'http://example.com/'},
     {weight: 2, url: 'http://example.com/foo'},
     {weight: 4, url: 'http://example.com/bar'},
