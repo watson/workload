@@ -19,7 +19,7 @@ test('modifying filter', function (t) {
   server.listen(function () {
     var port = server.address().port
     var opts = {
-      max: 5,
+      max: 5 * 60,
       filter: function filter (req, cb) {
         req.url += '/foo'
         cb()
@@ -42,7 +42,7 @@ test('replacing filter', function (t) {
   server.listen(function () {
     var port = server.address().port
     var opts = {
-      max: 5,
+      max: 5 * 60,
       filter: function filter (req, cb) {
         cb({url: req.url + '/bar'})
       },
@@ -60,7 +60,7 @@ test('error event', function (t) {
   server.listen(function () {
     var port = server.address().port
     var opts = {
-      max: 5,
+      max: 5 * 60,
       requests: [{url: 'http://localhost:' + port}]
     }
     workload = new Workload(opts)
@@ -81,7 +81,7 @@ test('visit event', function (t) {
   server.listen(function () {
     var port = server.address().port
     var opts = {
-      max: 5,
+      max: 5 * 60,
       requests: [{url: 'http://localhost:' + port}]
     }
     workload = new Workload(opts)
@@ -148,7 +148,7 @@ test('weights - 500 requests', function (t) {
     var port = server.address().port
     var url = 'http://localhost:' + port + '/'
     var opts = {
-      max: 100,
+      max: 100 * 60,
       requests: [
         {url: url + 0},
         {weight: 2, url: url + 1},

@@ -18,7 +18,7 @@ function Workload (opts) {
   EventEmitter.call(this)
 
   var self = this
-  var max = opts.max || 1 / 5 // default to max one request every 5 seconds
+  var max = (opts.max || 12) / 60 // default to max 12 requests per minute
   var filter = opts.filter || function (_, cb) { cb() }
   this._defaultHeaders = opts.headers
 

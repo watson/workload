@@ -34,11 +34,11 @@ npm install workload --save
 
 ## CLI Usage
 
-Example making one request per second to 5 different URL's with
+Example making max 60 requests per minute to 5 different URL's with
 different weights:
 
 ```
-workload --max 1 \
+workload --max 60 \
   POST,http://example.com/signup,"Hello World" \
   10,http://example.com/ \
   2,http://example.com/foo \
@@ -54,7 +54,7 @@ Run `workload --help` for all options.
 var Workload = require('workload')
 
 var workload = new Workload({
-  max: 0.5, // make a request once every 2 seconds maximum
+  max: 30, // make a request once every 2 seconds maximum
   filter: Workload.stdFilters.workingHours,
   requests: [
     {weight: 1, url: 'http://example.com/signup', method: 'POST', body: '...'},
@@ -80,8 +80,8 @@ Create a new workloader. The `workload` object is an EventEmitter.
 The constructor takes the following options:
 
 - `requests` - An array of `request` objects (see below)
-- `max` - The maximum number of requests to make per second (defaults to
-  `0.2`)
+- `max` - The maximum number of requests to make per minute (defaults to
+  `12`)
 - `headers` - An object containing the default HTTP headers to use for
   each request
 - `filter` - An optional filter function - see [Filters](#filters) for
