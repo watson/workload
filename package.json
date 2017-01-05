@@ -1,0 +1,40 @@
+{
+  "name": "workload",
+  "version": "0.0.0",
+  "description": "Sends HTTP requests to a server to mimic a natual load",
+  "main": "index.js",
+  "dependencies": {
+    "is-it-weekend": "^1.0.0",
+    "mostly-working-hours": "^1.0.0",
+    "request": "^2.79.0",
+    "weighted": "^0.3.0",
+    "xtend": "^4.0.1"
+  },
+  "devDependencies": {
+    "standard": "^8.6.0"
+  },
+  "scripts": {
+    "test": "standard && node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/watson/workload.git"
+  },
+  "keywords": [
+    "test",
+    "load",
+    "http",
+    "request",
+    "simulate",
+    "simulator",
+    "mimic",
+    "stress",
+    "bot"
+  ],
+  "author": "Thomas Watson Steen <w@tson.dk> (https://twitter.com/wa7son)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/watson/workload/issues"
+  },
+  "homepage": "https://github.com/watson/workload#readme"
+}
