@@ -143,8 +143,8 @@ requested URL might be `/foo/4`.
 
 ## Filters
 
-A filter is a function that will lower the chance of a request being
-made.
+A filter is a function that will either lower the chance of a request
+being made or modify the request in some way.
 
 The function is called every time a request is ready to be made. It's
 passed the request object and a callback. Whether or not it calls the
