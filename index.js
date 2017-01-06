@@ -7,6 +7,7 @@ var request = require('request')
 var weighted = require('weighted')
 var maybe = require('mostly-working-hours')
 var expand = require('brace-expansion')
+var weekend = require('is-it-weekend')
 var pkg = require('./package')
 
 var USER_AGENT = pkg.name + '/' + pkg.version
@@ -45,6 +46,10 @@ function Workload (opts) {
 util.inherits(Workload, EventEmitter)
 
 Workload.stdFilters = {
+  workdays: function (req, cb) {
+    var odds = weekend() ? 0.2 : 1
+    if (Math.random() <= odds) cb()
+  },
   workingHours: function (req, cb) {
     maybe(cb)
   },

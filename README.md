@@ -123,6 +123,10 @@ with the following properties is emitted:
 
 Stop making requests.
 
+### `Workload.stdFilters.workdays`
+
+This filter lowers the chances of a request being made during weekends.
+
 ### `Workload.stdFilters.workingHours`
 
 This filter lowers the chances of a request being made during weekends
