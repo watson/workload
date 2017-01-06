@@ -52,6 +52,39 @@ test('replacing filter', function (t) {
   })
 })
 
+test('filters arary', function (t) {
+  t.plan(3)
+
+  var n = 0
+
+  var server = http.createServer(function (req, res) {
+    res.end()
+    workload.stop()
+    server.close()
+    t.equal(req.url, '/filters')
+  })
+
+  server.listen(function () {
+    var port = server.address().port
+    var opts = {
+      max: 5 * 60,
+      filters: [f1, f2],
+      requests: [{url: 'http://localhost:' + port + '/filters'}]
+    }
+    workload = new Workload(opts)
+  })
+
+  function f1 (req, cb) {
+    t.equal(n++, 0)
+    cb()
+  }
+
+  function f2 (req, cb) {
+    t.equal(n++, 1)
+    process.nextTick(cb)
+  }
+})
+
 test('error event', function (t) {
   var server = http.createServer(function (req, res) {
     req.socket.destroy()

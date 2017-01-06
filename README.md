@@ -86,6 +86,8 @@ The constructor takes the following options:
   each request
 - `filter` - An optional filter function - see [Filters](#filters) for
   details
+- `filters` - An optional array of filter functions which will be called
+  sequentially - see [Filters](#filters) for details
 
 Each `request` object can contain the following properties:
 

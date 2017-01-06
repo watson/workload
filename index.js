@@ -19,7 +19,7 @@ function Workload (opts) {
 
   var self = this
   var interval = Math.round(1000 / ((opts.max || 12) / 60)) // default to max 12 requests per minute
-  var filter = opts.filter || function (_, cb) { cb() }
+  var filters = opts.filters || [opts.filter || function (_, cb) { cb() }]
   this._defaultHeaders = opts.headers
 
   var weights = opts.requests.map(function (req) {
@@ -28,10 +28,17 @@ function Workload (opts) {
 
   this._timer = setInterval(function () {
     var req = xtend({}, weighted.select(opts.requests, weights))
-    filter(req, function (modified) {
-      self._visit(modified || req)
-    })
+    iterator(req)
   }, interval)
+
+  function iterator (req, n) {
+    if (!n) n = 0
+    var filter = filters[n]
+    if (!filter) return self._visit(req)
+    filter(req, function (modified) {
+      iterator(modified || req, ++n)
+    })
+  }
 }
 
 util.inherits(Workload, EventEmitter)
