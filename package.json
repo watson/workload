@@ -1,6 +1,6 @@
 {
   "name": "workload",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Sends HTTP requests to a server to mimic a natual load",
   "main": "index.js",
   "bin": "cli.js",
@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/watson/workload#readme",
   "coordinates": [
-    55.68101650000001,
-    12.5643759
+    55.6812061,
+    12.5646123
   ]
 }
