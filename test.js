@@ -1,11 +1,28 @@
 'use strict'
 
+var assert = require('assert')
 var http = require('http')
 var test = require('tape')
 var pkg = require('./package')
 var Workload = require('./')
 
 var workload
+
+test('Workload.stdFilters.expand', function (t) {
+  var req
+  for (var n = 0; n < 10000; n++) {
+    req = {url: 'http://example.com/foo/{1..9}'}
+    Workload.stdFilters.expand(req, function () {
+      var url = req.url
+      var base = url.slice(0, url.lastIndexOf('/'))
+      var num = url.slice(url.lastIndexOf('/') + 1)
+      assert.equal(base, 'http://example.com/foo')
+      assert(!Number.isNaN(Number(num)), 'is not NaN')
+      assert(/^\d$/.test(num), num + ' is in expected range')
+    })
+  }
+  t.end()
+})
 
 test('modifying filter', function (t) {
   var server = http.createServer(function (req, res) {

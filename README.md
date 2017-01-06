@@ -128,7 +128,14 @@ Stop making requests.
 This filter lowers the chances of a request being made during weekends
 and at night.
 
-For details about filters, see the [Filters](#filters) section.
+### `Workload.stdFilters.expand`
+
+This filter expands braces in URL's and picks a random matching URL.
+
+For instance, given a request with a URL of
+`http://example.com/foo/{1..10}` this filter will replace the `{1..10}`
+part of the URL with a random number between 1 and 10. So the actual
+requested URL might be `/foo/4`.
 
 ## Filters
 

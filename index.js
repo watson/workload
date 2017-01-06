@@ -6,6 +6,7 @@ var xtend = require('xtend')
 var request = require('request')
 var weighted = require('weighted')
 var maybe = require('mostly-working-hours')
+var expand = require('brace-expansion')
 var pkg = require('./package')
 
 var USER_AGENT = pkg.name + '/' + pkg.version
@@ -44,8 +45,13 @@ function Workload (opts) {
 util.inherits(Workload, EventEmitter)
 
 Workload.stdFilters = {
-  workingHours: function (_, cb) {
+  workingHours: function (req, cb) {
     maybe(cb)
+  },
+  expand: function (req, cb) {
+    var urls = expand(req.url)
+    req.url = urls[Math.round(Math.random() * (urls.length - 1))]
+    cb()
   }
 }
 
