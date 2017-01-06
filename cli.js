@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict'
 
+var path = require('path')
 var http = require('http')
 var argv = require('minimist')(process.argv.slice(2))
 var csv = require('csv-line')
@@ -9,27 +10,33 @@ var pkg = require('./package')
 
 if (argv.h || argv.help) help()
 else if (argv.v || argv.version) version()
-else if (argv._.length) run()
+else if (argv.f || argv.file || argv._.length) run()
 else invalid()
 
 function run () {
-  var opts = {
-    max: argv.max
+  var file = argv.f || argv.file
+  var opts
+  if (file) {
+    file = path.resolve(file)
+    console.log(file)
+    opts = require(file)
+  } else {
+    opts = {}
+    if (argv.max) opts.max = argv.max
+    if (argv.filter === 'WH') opts.filter = Workload.stdFilters.workingHours
+    if (argv.H) opts.headers = parseHeaders(argv.H)
+    if (argv.H) opts.headers = parseHeaders(argv.H)
+
+    opts.requests = argv._.map(function (line) {
+      var parts = csv.decode(line)
+      var req = {}
+      if (Number.isFinite(parts[0])) req.weight = parts.shift()
+      if (http.METHODS.indexOf(parts[0]) !== -1) req.method = parts.shift()
+      req.url = parts.shift()
+      if (parts.length) req.body = parts[0]
+      return req
+    })
   }
-
-  if (argv.filter === 'WH') opts.filter = Workload.stdFilters.workingHours
-  if (argv.H) opts.headers = parseHeaders(argv.H)
-  if (argv.H) opts.headers = parseHeaders(argv.H)
-
-  opts.requests = argv._.map(function (line) {
-    var parts = csv.decode(line)
-    var req = {}
-    if (Number.isFinite(parts[0])) req.weight = parts.shift()
-    if (http.METHODS.indexOf(parts[0]) !== -1) req.method = parts.shift()
-    req.url = parts.shift()
-    if (parts.length) req.body = parts[0]
-    return req
-  })
 
   var workload = new Workload(opts)
 
@@ -65,12 +72,13 @@ function help () {
   console.log()
   console.log('Options:')
   console.log()
-  console.log('  -h, --help     Show this help')
-  console.log('  -v, --version  Show the version')
-  console.log('  --silent       Don\'t output anything')
-  console.log('  --max NUM      The maximum number of requests per minute (default: 12')
-  console.log('  --filter NAME  Use named standard filter (working hours: WH)')
-  console.log('  -H LINE        Add default HTTP header (can be used multiple times)')
+  console.log('  -h, --help       Show this help')
+  console.log('  -v, --version    Show the version')
+  console.log('  -f, --file PATH  Load config from JSON file')
+  console.log('  --silent         Don\'t output anything')
+  console.log('  --max NUM        The maximum number of requests per minute (default: 12')
+  console.log('  --filter NAME    Use named standard filter (working hours: WH)')
+  console.log('  -H LINE          Add default HTTP header (can be used multiple times)')
   console.log()
   console.log('Each request is a comma separated list of values follwoing this pattern:')
   console.log()
