@@ -85,7 +85,7 @@ The constructor takes the following options:
 - `headers` - An object containing the default HTTP headers to use for
   each request
 - `filter` - An optional filter function - see [Filters](#filters) for
-  details (defaults to `Workload.stdFilters.noop`)
+  details
 
 Each `request` object can contain the following properties:
 
