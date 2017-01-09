@@ -78,52 +78,52 @@ function invalid () {
 }
 
 function help () {
-  console.log('Usage:')
-  console.log('  %s [options] requests...', pkg.name)
-  console.log()
-  console.log('Options:')
-  console.log()
-  console.log('  -h, --help       Show this help')
-  console.log('  -v, --version    Show the version')
-  console.log('  -f, --file PATH  Load config from JSON file')
-  console.log('  --silent         Don\'t output anything')
-  console.log('  --max NUM        The maximum number of requests per minute (default: 12')
-  console.log('  --filter NAME    Use named standard filter (see Filters section below)')
-  console.log('  -H LINE          Add default HTTP header (can be used multiple times)')
-  console.log()
-  console.log('Filter names:')
-  console.log()
-  console.log('  WD   Workdays - This filter lowers the chances of a request being made during')
-  console.log('       weekends')
-  console.log('  WH   Working Hours - This filter lowers the chances of a request being made')
-  console.log('       during weekends and at night')
-  console.log('  EX   Expand - This filter expands braces in URL\'s and picks a random matching')
-  console.log('       URL')
-  console.log()
-  console.log('Each request is a comma separated list of values follwoing this pattern:')
-  console.log()
-  console.log('  [WEIGHT,][METHOD,]URL[,BODY]')
-  console.log()
-  console.log('  WEIGHT  The numeric weight of the request (default: 1)')
-  console.log('  METHOD  HTTP method (default: GET)')
-  console.log('  URL     Full URL to request (required)')
-  console.log('  BODY    The HTTP body')
-  console.log()
-  console.log('Examples:')
-  console.log()
-  console.log('  %s http://example.com http://example.com/foo', pkg.name)
-  console.log('    Make two GET requests with equal weight')
-  console.log()
-  console.log('  %s 1,http://example.com 2,http://example.com/foo', pkg.name)
-  console.log('    Make two GET requests with a double chance of the latter being made')
-  console.log()
-  console.log('  %s --max=60 http://example.com POST,http://example.com,"Hello World"', pkg.name)
-  console.log('    Make a maximum of one request per second and make either a GET')
-  console.log('    request or a POST request with the body "Hello World"')
-  console.log()
-  console.log('  %s -H "Accept: text/plain" http://example.com', pkg.name)
-  console.log('    Set a custom Accept header')
-  console.log()
+  console.log(`Usage:
+  ${pkg.name} [options] requests...
+
+Options:
+
+  -h, --help       Show this help
+  -v, --version    Show the version
+  -f, --file PATH  Load config from JSON file
+  --silent         Don't output anything
+  --max NUM        The maximum number of requests per minute (default: 12)
+  --filter NAME    Use named standard filter (see Filters section below)
+  -H LINE          Add default HTTP header (can be used multiple times)
+
+Filter names:
+
+  WD   Workdays - This filter lowers the chances of a request being made during
+       weekends
+  WH   Working Hours - This filter lowers the chances of a request being made
+       during weekends and at night
+  EX   Expand - This filter expands braces in URL's and picks a random matching
+       URL
+
+Each request is a comma separated list of values follwoing this pattern:
+
+  [WEIGHT,][METHOD,]URL[,BODY]
+
+  WEIGHT  The numeric weight of the request (default: 1)
+  METHOD  HTTP method (default: GET)
+  URL     Full URL to request (required)
+  BODY    The HTTP body
+
+Examples:
+
+  ${pkg.name} http://example.com http://example.com/foo
+    Make two GET requests with equal weight
+
+  ${pkg.name} 1,http://example.com 2,http://example.com/foo
+    Make two GET requests with a double chance of the latter being made
+
+  ${pkg.name} --max=60 http://example.com POST,http://example.com,"Hello World"
+    Make a maximum of one request per second and make either a GET
+    request or a POST request with the body "Hello World"
+
+  ${pkg.name} -H "Accept: text/plain" http://example.com
+    Set a custom Accept header
+`)
 }
 
 function version () {
