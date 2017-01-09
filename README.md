@@ -99,10 +99,10 @@ Each `request` object can contain the following properties:
   (overrules `options.headers`)
 - `body` - Entity body for `PATCH`, `POST` and `PUT` requests. Must be a
   `Buffer`, `String` or `ReadStream`. If `json` is true, then body must
-  be a JSON-serializable object.
+  be a JSON-serializable object
 - `json` - Sets body to JSON representation of value and adds
   `Content-type: application/json` header. Additionally, parses the
-  response body as JSON.
+  response body as JSON
 - For additional options, [see the options accepted by the request
   module](https://github.com/request/request#requestoptions-callback).
 
