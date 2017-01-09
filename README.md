@@ -84,8 +84,8 @@ The constructor takes the following options:
   `12`)
 - `headers` - An object containing the default HTTP headers to use for
   each request
-- `filter` - An optional filter function - see [Filters](#filters) for
-  details
+- `filter` - An optional filter single function (shorthand for `filters:
+  [filter]`) - see [Filters](#filters) for details
 - `filters` - An optional array of filter functions which will be called
   sequentially - see [Filters](#filters) for details
 
