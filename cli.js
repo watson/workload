@@ -8,6 +8,12 @@ var csv = require('csv-line')
 var Workload = require('./')
 var pkg = require('./package')
 
+var FILTERS = {
+  WD: Workload.stdFilters.workdays,
+  WH: Workload.stdFilters.workingHours,
+  EX: Workload.stdFilters.expand
+}
+
 if (argv.h || argv.help) help()
 else if (argv.v || argv.version) version()
 else if (argv.f || argv.file || argv._.length) run()
@@ -23,7 +29,12 @@ function run () {
   } else {
     opts = {}
     if (argv.max) opts.max = argv.max
-    if (argv.filter === 'WH') opts.filter = Workload.stdFilters.workingHours
+    if (argv.filter) {
+      if (!Array.isArray(argv.filter)) argv.filter = [argv.filter]
+      opts.filters = argv.filter.map(function (name) {
+        return FILTERS[name]
+      })
+    }
     if (argv.H) opts.headers = parseHeaders(argv.H)
     if (argv.H) opts.headers = parseHeaders(argv.H)
 
@@ -77,8 +88,17 @@ function help () {
   console.log('  -f, --file PATH  Load config from JSON file')
   console.log('  --silent         Don\'t output anything')
   console.log('  --max NUM        The maximum number of requests per minute (default: 12')
-  console.log('  --filter NAME    Use named standard filter (working hours: WH)')
+  console.log('  --filter NAME    Use named standard filter (see Filters section below)')
   console.log('  -H LINE          Add default HTTP header (can be used multiple times)')
+  console.log()
+  console.log('Filter names:')
+  console.log()
+  console.log('  WD   Workdays - This filter lowers the chances of a request being made during')
+  console.log('       weekends')
+  console.log('  WH   Working Hours - This filter lowers the chances of a request being made')
+  console.log('       during weekends and at night')
+  console.log('  EX   Expand - This filter expands braces in URL\'s and picks a random matching')
+  console.log('       URL')
   console.log()
   console.log('Each request is a comma separated list of values follwoing this pattern:')
   console.log()
