@@ -60,8 +60,8 @@ test('replacing filter', function (t) {
     var port = server.address().port
     var opts = {
       max: 5 * 60,
-      filter: function filter (req, cb) {
-        cb({url: req.url + '/bar'})
+      filter: function filter (req, next) {
+        next({url: req.url + '/bar'})
       },
       requests: [{url: 'http://localhost:' + port}]
     }
