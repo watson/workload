@@ -147,6 +147,33 @@ test('visit event', function (t) {
   })
 })
 
+test('custom headers', function (t) {
+  t.plan(3)
+
+  var server = http.createServer(function (req, res) {
+    t.equal(req.headers.custom1, 'foo')
+    t.equal(req.headers.custom2, 'bar')
+    t.equal(req.headers.custom3, 'baz')
+    res.end()
+    workload.stop()
+    server.close()
+  })
+
+  server.listen(function () {
+    var port = server.address().port
+    var opts = {
+      max: 5 * 60,
+      headers: {custom1: 'foo'},
+      requests: [{url: 'http://localhost:' + port, headers: {custom2: 'bar'}}],
+      filter: function (req, next) {
+        req.headers.custom3 = 'baz'
+        next(req)
+      }
+    }
+    workload = new Workload(opts)
+  })
+})
+
 test('default values', function (t) {
   var deadswitch
 

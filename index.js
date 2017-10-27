@@ -67,7 +67,7 @@ Workload.prototype.stop = function stop () {
 Workload.prototype._visit = function _visit (req) {
   var self = this
 
-  req = xtend(req, {headers: this._defaultHeaders}, {headers: {'user-agent': USER_AGENT}})
+  req.headers = xtend(req.headers, this._defaultHeaders, {'user-agent': USER_AGENT})
 
   request(req, function (err, res, body) {
     if (err) return self.emit('error', err)
