@@ -236,3 +236,31 @@ test('weights - 500 requests', function (t) {
     workload = new Workload(opts)
   })
 })
+
+test('custom agent', function (t) {
+  t.plan(1)
+
+  var server = http.createServer(function (req, res) {
+    t.equal(req.headers['user-agent'], 'custom agent')
+    res.end()
+    workload.stop()
+    server.close()
+  })
+
+  server.listen(function () {
+    var port = server.address().port
+    var opts = {
+      max: 5 * 60,
+      headers: {'user-agent': 'custom agent'},
+      requests: [{url: 'http://localhost:' + port}],
+      filter: function (req, next) {
+        if (req.headers === undefined) {
+          req.headers = {}
+        }
+        req.headers['user-agent'] = 'custom agent'
+        next(req)
+      }
+    }
+    workload = new Workload(opts)
+  })
+})
