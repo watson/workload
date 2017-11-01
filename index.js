@@ -67,13 +67,7 @@ Workload.prototype.stop = function stop () {
 Workload.prototype._visit = function _visit (req) {
   var self = this
 
-  req.headers = xtend(req.headers, this._defaultHeaders)
-
-  // Only set if user agent if it isn't set
-  //
-  if (typeof req.headers['user-agent'] === 'undefined') {
-    req.headers = xtend(req.headers, {'user-agent': USER_AGENT})
-  }
+  req.headers = xtend({'user-agent': USER_AGENT}, this._defaultHeaders, req.headers)
 
   request(req, function (err, res, body) {
     if (err) return self.emit('error', err)
