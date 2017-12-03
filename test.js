@@ -264,3 +264,29 @@ test('custom agent', function (t) {
     workload = new Workload(opts)
   })
 })
+
+test('custom header and filter header', function (t) {
+  t.plan(1)
+
+  var server = http.createServer(function (req, res) {
+    t.equal(req.headers.custom1, 'baz')
+    res.end()
+    workload.stop()
+    server.close()
+  })
+
+  server.listen(function () {
+    var port = server.address().port
+    var opts = {
+      max: 5 * 60,
+      headers: {custom1: 'foo'},
+      requests: [{url: 'http://localhost:' + port}],
+      filter: function (req, next) {
+        req.headers = {}
+        req.headers['custom1'] = 'baz'
+        next(req)
+      }
+    }
+    workload = new Workload(opts)
+  })
+})
