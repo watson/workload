@@ -1,6 +1,6 @@
 # workload
 
-Sends HTTP requests to a server to mimic a natual load.
+Sends HTTP requests to a server to mimic a natural load.
 
 The requests are randomized using weights, so certain requests appear
 more often than others.
